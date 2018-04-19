@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>エネミー詳細</title>
+<style></style>
+<script type="text/javascript" src="../jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="DB_index.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="content-style-type" content="text/css">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="special.css" type="text/css" media="screen">
+<link rel="stylesheet" href="pop_up.css" type="text/css" media="screen">
+</head>
+<body>
+<?php
+if(isset($_GET["char"])){
+	$table_name=$_GET["table"];
+	$id_num=$_GET["char"];
+}
+require_once("./conection.php");
+$mysqli = db_connect();
+
+$sql="SELECT * FROM ".$table_name." WHERE ID = ".$id_num;
+
+$result = $mysqli -> query($sql);
+foreach ($result as $row){
+	echo "<div id ='pic'><img src='img/".$row["pic"]."'></img></div>\n";
+echo "
+	<div id='general'>\n
+		<p>\n";
+			echo "<span>name:".$row["name"]."</span><span>　レベル".$row["level"]."</span>\n";
+echo "
+		</p>\n
+		<p>\n";
+			echo "<span>種族:".$row["race"]."</span><span>　参照:".$row["review"]."</span>\n";
+echo "
+		</p>\n
+		<p>\n";
+			echo "<span>知能:".$row["knowledge"]."</span><span>　知覚".$row["sense"]."</span>\n";
+echo "
+		</p>\n
+		<p>\n";
+			echo "<span>言語:".$row["word"]."</span>\n";
+			//文字数を記録しておき、長いようなら圧縮の方向
+echo "
+		</p>\n
+		<p>\n";
+			echo "<span>生息地:".$row["habitat"]."</span>\n";
+			//文字数を記録しておき、長いようなら圧縮の方向
+echo "
+		</p>\n
+		<p>\n";
+			echo "<span>知名度/弱点値:".$row["reputation"]."/".$row["weak"]."</span><span>　弱点:".$row["weak_point"]."</span>\n";
+echo "
+		</p>\n
+		<p>\n";
+			echo "<span>先制値:".$row["preemptive"]."</span><span>　移動速度:".$row["move"]."</span>\n";
+echo "
+		</p>\n
+		<p>\n";
+			echo "<span>生命抵抗:".$row["con"]."(".($row["con"]+7).")</span><span>　精神抵抗:".$row["pow"]."(".($row["pow"]+7).")</span>\n";
+echo "</p>\n
+	</div>\n";
+echo <<< EOT
+	<div id="status">
+	<table>
+	<tr id ="status_1">
+EOT;
+	$region_name = explode("_",$row["region_name"]);
+	$weapon = explode("_",$row["weapon"]);
+	$hit = explode("_",$row["hit"]);
+	$ap = explode("_",$row["ap"]);
+	$avoid = explode("_",$row["avoid"]);
+	$dp = explode("_",$row["dp"]);
+	$HP = explode("_",$row["HP"]);
+	$MP = explode("_",$row["MP"]);
+	$special = explode("_",$row["special"]);
+	$special_region = explode("_",$row["special_region"]);
+
+if($row["region"]>1){
+	echo "<td>攻撃方法(部位)</td><td>命中力</td><td>打撃点</td>\n";
+}else{
+	echo "<td>攻撃方法</td><td>命中力</td><td>打撃点</td>\n";
+}
+	for($i=0; $i<$row["region"]; $i++){
+		echo "<tr>\n";
+		if($row["region"]>1){
+			echo "<td>".$weapon[$i]."(".$region_name[$i].")</td><td>".$hit[$i]."(".($hit[$i]+7).")</td><td>2d＋".$ap[$i]."</td>\n";
+		}else{
+			echo "<td>".$weapon[$i]."</td><td>".$hit[$i]."(".($hit[$i]+7).")</td><td>2d＋".$ap[$i]."</td>\n";
+		}
+	}
+
+	echo "</tr>\n";
+	echo "<tr id='status_2'>\n";
+	echo "<td>回避力</td><td>防護点</td>";
+	for($i=0; $i<$row["region"]; $i++){
+		echo "<tr>\n";
+		echo "<td>".$avoid[$i]."(".($avoid[$i]+7).")</td><td>".$dp[$i]."</td>\n";
+	}
+	echo "</tr>\n";
+	echo "<tr id='status_3'>\n";
+	echo "<td>HP</td><td>MP</td>\n";
+	for($i=0; $i<$row["region"]; $i++){
+		echo "<tr>\n";
+		echo "<td>".$HP[$i]."</td><td>".$MP[$i]."</td>\n";
+	}
+	echo "</tr>\n";
+	echo "</table>\n";
+
+if($row["region"]>1){
+	echo "<span class='under_line bold'>部位</span>\n";
+	echo "<div id='region'>\n";
+	echo "<span>部位数:".$row["region"];
+	echo "(".$region_name[0];
+	for($i=1; $i<$row["region"]; $i++){
+		echo "／".$region_name[$i];
+	}
+	echo ")</span>\n<br>";
+	echo "<span>コア部位:".$row["core"]."</span>\n";
+}
+echo <<< EOT
+	</div>
+	<div id="special">
+	<span class="bar">特殊能力</span>
+EOT;
+	if($row["region"]>1){
+		for($i=0; $i<count($special_region); $i++){
+			echo "<span class='under_line bold'>●".$special_region[$i]."</span>\n<br>";
+			echo $special[$i];
+			echo "<br>\n";
+		}
+	}else{
+		echo $special[0];
+	}
+
+
+	$booty_dice = explode("_",$row["booty_dice"]);
+	$booty = explode("_",$row["booty"]);
+	$booty_gamel = explode("_",$row["booty_gamel"]);
+	$booty_card = explode("_",$row["booty_card"]);
+
+	echo "</div>\n";
+	echo "<div id='booty'>\n";
+	echo "<span class='bold'>戦利品</span><br>\n";
+	echo "<table>\n";
+	for($i=0; $i<count($booty_dice); $i++){
+		echo "<tr>\n";
+		echo "<td class='left_line'>\n";
+		echo $booty_dice[$i];
+		echo "</td>";
+		echo "<td>";
+		if ($booty_gamel[$i]==0){
+			echo"なし";
+		}else{
+			$ex = explode("×",$booty_gamel[$i]);
+			if(count($ex)>1){
+				echo $booty[$i]." (".$ex[0]."G／".$booty_card[$i].")　×".$ex[1];
+			}else{
+				echo $booty[$i]." (".$booty_gamel[$i]."G／".$booty_card[$i].")";
+			}
+		}
+		echo "</tr>\n";
+	}
+echo "</table>";
+echo <<< EOT
+	</div>
+	<div id="detail">
+	<span class="description">解説</span><br>
+EOT;
+	echo $row["description"];
+	echo "</div>\n";
+}
+?>
+</body>
+</html>

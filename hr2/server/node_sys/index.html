@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<meta charset="UTF-8">
+<title>websocket test</title>
+
+<div id = "content">
+<p id="sent">
+<!--
+	この部分が送信部
+ -->
+	<form class="sent_form">
+		<div class="inform_set">
+			<label>メッセージテスト:</label>
+			<input type="text" id="msgform">
+		</div>
+		<button type="submit" class="sent_button">送信</button>
+	</form>
+</p>
+<p id= "recieve">
+	<p id="sample">sample</p>
+</p>
+</div>
+ <script type="text/javascript">
+var socket = io.connect();
+
+socket.on("server_to_client", function(data){
+	appendMsg(data.value)
+	console.log("s2c:"+data);
+	console.log("s2c:"+data.value);
+});
+
+function appendMsg(text) {
+	$("#recieve").append("<p>" + text + "</p>");
+}
+
+$("form").submit(function(e){
+	var message = $("#msgform").val();
+	$("#msgform").val('');
+	socket.emit("client_to_server", {value : message});
+	e.preventDefault();
+	console.log("c2s:"+message);
+	//test
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>

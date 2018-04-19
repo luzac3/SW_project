@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<head>
+<title>エネミー追加</title>
+<style></style>
+<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="special_make.js"></script>
+<script type="text/javascript" src="get_input.js"></script>
+<script type="text/javascript" src="special_make_event.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="content-style-type" content="text/css">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="coop.css" type="text/css" media="screen">
+</head>
+<?php
+echo "<h1>エネミー入力フォーム(".$_GET["table"].")</h1>";
+echo '<form id="'.$_GET["table"].'">';
+?>
+<table>
+<tr id="race">
+<td class="label">種族選択:</td>
+<td><select onchange="table_change(this)">
+	<option value="barbaros">蛮族</option>
+	<option value="animal">動物</option>
+	<option value="plant">植物</option>
+	<option value="undead">アンデッド</option>
+	<option value="magical_creatures">魔法生物</option>
+	<option value="cryptid">幻獣</option>
+	<option value="fairy">妖精</option>
+	<option value="daemon">魔神</option>
+	<option value="human">人族</option>
+</select></td>
+
+</tr>
+<tr id="name">
+<td class="label">名前:</td>
+<td><input type="text"></input>
+<span>　画像有</span>
+<input id="pic" type="checkbox" value="pic">(原則チェックしない)</td>
+</tr>
+
+<tr id="level">
+<td class="label">レベル:</td>
+<td><select>
+	<?php
+		for ($i=1; $i<=25; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+</select></td>
+</tr>
+
+<tr id="review">
+<td class="label">参照:</td>
+<td>
+	<select>
+		<option value="base1">基本Ⅰ</option>
+		<option value="base2">基本Ⅱ</option>
+		<option value="base3">基本Ⅲ</option>
+		<option value="AW">AW</option>
+		<option value="BT">BT</option>
+		<option value="WT">WT</option>
+		<option value="CG">CG</option>
+	</select>
+<input type="text" class="three_words"></input><span>P(入力は旧ページに統一)</span>
+</tr>
+
+<tr id="knowledge">
+<td class="label">知能:</td>
+<td>
+	<lavel><input type="radio" name="knowledge" value="none">なし</lavel>
+	<lavel><input type="radio" name="knowledge" value="animal">動物並み</lavel>
+	<lavel><input type="radio" name="knowledge" value="low" checked = "checked">低い</lavel>
+	<lavel><input type="radio" name="knowledge" value="human">人間並み</lavel>
+	<lavel><input type="radio" name="knowledge" value="high">高い</lavel>
+</td>
+</tr>
+
+<tr id="sense">
+<td class="label">知覚:</td>
+<td>
+<select>
+	<option value="sight">五感</option>
+	<option value="infrared">五感(暗視)</option>
+	<option value="magic">魔法</option>
+</select>
+</td>
+</tr>
+
+<tr id="reaction">
+<td class="label">反応:</td>
+<td>
+	<lavel><input type="radio" name="reaction" value="none">なし</lavel>
+	<lavel><input type="radio" name="reaction" value="low" checked = "checked">敵対的</lavel>
+	<lavel><input type="radio" name="reaction" value="none">中立</lavel>
+	<lavel><input type="radio" name="reaction" value="animal">腹具合による</lavel>
+</td>
+</tr>
+<!--
+要改訂。
+ちゃんとなしなどを選択したら下を隠すように
+表示しなおすのも面倒なのでhideでよい(たとえ値が入っていても、その場合は値の取得をスキップしてるので問題ない)
+-->
+<tr id="word">
+<td id="label">言語:</td>
+<td>
+<p id="word_first">
+	<lavel><input type="radio" name="word_first" value="none">なし</lavel>
+	<lavel><input type="radio" name="word_first" value="exist" checked = "checked">あり</lavel>
+	<lavel><input type="radio" name="word_first" value="all">すべての言語</lavel>
+</p>
+<p class="word_disabled">
+	<!--
+		なしとすべての言語が選択されたら非選択に
+	-->
+	<lavel><input type="checkbox" name="word" value="trade">交易共通語</lavel>
+	<lavel><input type="checkbox" name="word" value="elf">エルフ語</lavel>
+	<lavel><input type="checkbox" name="word" value="dwarf">ドワーフ語</lavel>
+	<lavel><input type="checkbox" name="word" value="grassrunner">グラスランナー語</lavel>
+</p>
+<p class="word_disabled">
+	<lavel><input type="checkbox" name="word" value="shadow">シャドウ語</lavel>
+	<lavel><input type="checkbox" name="word" value="miacis">ミアキス語</lavel>
+	<lavel><input type="checkbox" name="word" value="soleil">ソレイユ語</lavel>
+</p>
+<p class="word_disabled">
+	<lavel><input type="checkbox" name="word" value="shnela">神紀文明語</lavel>
+	<lavel><input type="checkbox" name="word" value="al_menas">魔動機文明語</lavel>
+	<lavel><input type="checkbox" name="word" value="dulandil">魔法文明語</lavel>
+	<lavel><input type="checkbox" name="word" value="fairy">妖精語</lavel>
+</p>
+<p class="word_disabled">
+	<lavel><input type="checkbox" name="word" value="daemon">魔神語</lavel>
+	<lavel><input type="checkbox" name="word" value="dragon">ドラゴン語</lavel>
+	<lavel><input type="checkbox" name="word" value="barbaros">汎用蛮族語</lavel>
+	<lavel><input type="checkbox" name="word" value="apparition ">妖魔語</lavel>
+</p>
+<p class="word_disabled">
+	<lavel><input type="checkbox" name="word" value="giant">巨人語</lavel>
+	<lavel><input type="checkbox" name="word" value="drake">ドレイク語</lavel>
+	<lavel><input type="checkbox" name="word" value="balkan">バルカン語</lavel>
+	<lavel><input type="checkbox" name="word" value="drake">ライカンスロープ語</lavel>
+</p>
+<p class="word_disabled">
+	<lavel><input type="checkbox" name="word" value="basilisk">バジリスク語</lavel>
+	<lavel><input type="checkbox" name="word" value="rizard_man">リザードマン語</lavel>
+	<lavel><input type="checkbox" name="word" value="kentauros">ケンタウロス語</lavel>
+	<lavel><input type="checkbox" name="word" value="nosferatu">ノスフェラトゥ語</lavel>
+</p>
+<p>
+	<lavel><input type="checkbox" name="word" value="other">その他<input type="text"></lavel>
+</p>
+<p class="word_button">
+	<button type="button" value="add">追加</button>
+	<button type="button" value="del">削除</button>
+</p>
+
+</td>
+</tr>
+
+<tr id="habitat">
+<td class="label">生息地:</td>
+<td>
+<p id="habitat_first">
+	<lavel><input type="radio" name="habitat_first" value="unknown">不明</lavel>
+	<lavel><input type="radio" name="habitat_first" value="valious">さまざま</lavel>
+	<lavel><input type="radio" name="habitat_first" value="other" checked = "checked">その他</lavel>
+</p>
+<p class="habitat_disabled">
+	<lavel><input type="checkbox" name="habitat" value="forest">森</lavel>
+	<lavel><input type="checkbox" name="habitat" value="plain">平原</lavel>
+	<lavel><input type="checkbox" name="habitat" value="grassland">草原</lavel>
+	<lavel><input type="checkbox" name="habitat" value="mountain">山岳</lavel>
+	<lavel><input type="checkbox" name="habitat" value="high">高空</lavel>
+
+</p>
+<p class="habitat_disabled">
+	<lavel><input type="checkbox" name="habitat" value="waterside">水辺</lavel>
+	<lavel><input type="checkbox" name="habitat" value="river">川</lavel>
+	<lavel><input type="checkbox" name="habitat" value="lake">湖</lavel>
+	<lavel><input type="checkbox" name="habitat" value="swamp">沼</lavel>
+	<lavel><input type="checkbox" name="habitat" value="marsh">湿地</lavel>
+	<lavel><input type="checkbox" name="habitat" value="sea">海</lavel>
+</p>
+<p class="habitat_disabled">
+	<lavel><input type="checkbox" name="habitat" value="cold_area">寒冷地</lavel>
+	<lavel><input type="checkbox" name="habitat" value="volcano">火山</lavel>
+	<lavel><input type="checkbox" name="habitat" value="cave">洞窟</lavel>
+	<lavel><input type="checkbox" name="habitat" value="desert">砂漠</lavel>
+	<lavel><input type="checkbox" name="habitat" value="wilderness">荒野</lavel>
+	<lavel><input type="checkbox" name="habitat" value="remains">遺跡</lavel>
+	<lavel><input type="checkbox" name="habitat" value="dangeon ">地下迷宮</lavel>
+</p>
+<p>
+	<lavel><input type="checkbox" name="habitat" value="other">その他<input type="text"></input></lavel>
+</p>
+<p class="habitat_button">
+	<button type="button" value="add">追加</button>
+	<button type="button" value="del">削除</button>
+</p>
+
+</td>
+</tr>
+
+<tr id="reputation">
+<td class="label">知名度:</td>
+<td><select>
+	<?php
+		for ($i=5; $i<=30; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+</select></td>
+</tr>
+
+<tr id="weak">
+<td class="label">弱点値:</td>
+<td><select>
+	<?php
+		for ($i=10; $i<=35; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+</select></td>
+</tr>
+
+<tr id="weakness">
+<td class="label">弱点:</td>
+<td>
+	<select>
+		<option value="magic">魔法ダメージ＋2点</option>
+		<option value="physical">物理ダメージ＋2点</option>
+		<option value="hit">命中力＋1</option>
+		<option value="flame">炎属性ダメージ＋3点</option>
+		<option value="ice">水・氷属性ダメージ＋3点</option>
+		<option value="wind">風属性ダメージ＋3点</option>
+		<option value="ground">土属性ダメージ＋3点</option>
+		<option value="thunder">雷属性ダメージ＋3点</option>
+		<option value="pure">純エネルギー属性ダメージ＋3点</option>
+		<option value="impact">衝撃属性ダメージ＋3点</option>
+		<option value="slash">斬撃属性ダメージ＋3点</option>
+		<option value="silver">銀武器ダメージ＋3点</option>
+		<option value="heal_3">回復効果ダメージ＋3点</option>
+		<option value="heal_4">回復効果ダメージ＋4点</option>
+		<option value="none">なし</option>
+	</select>
+</td>
+</tr>
+
+<tr id="preemptive">
+<td class="label">先制値:</td>
+<td><select>
+	<?php
+		for ($i=5; $i<=35; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+</select></td>
+</tr>
+
+<tr id="move">
+<td class="label">移動速度:</td>
+<td>
+	<select>
+	<?php
+		for ($i=5; $i<=35; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+	</select>
+	<p>
+	<input type="checkbox" name="move" value="fly">飛行
+	<input type="checkbox" name="move" value="swim">水中
+	<select  class="sp_move" disabled=true>
+<!--
+	片方をチェックしたら片方はチェックできないように設定する
+	またセレクトもdisabledを解放するように
+-->
+	<?php
+		for ($i=10; $i<=60; $i += 5){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+	</select>
+	</p>
+</td>
+</tr>
+
+<tr id="resist">
+<td class="label">抵抗:</td>
+<td>
+<p>精神:
+	<select>
+	<?php
+		for ($i=1; $i<=40; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+	</select>
+</p>
+<p>生命:
+	<select>
+	<?php
+		for ($i=1; $i<=40; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+	</select>
+</p>
+</td>
+</tr>
+
+<tr id="region">
+<td class="label">部位数:</td>
+<td>
+	<select onchange="region_make(this)">
+	<?php
+		for ($i=1; $i<=10; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+	</select>
+</td>
+</tr>
+
+<tr id="core" class="hide">
+	<td>コア部位:</td>
+	<td>
+		<input type="text"></input>
+	</td>
+</tr>
+
+<tr id="region_name" class="hide">
+	<td>部位名</td>
+	<td class="region_name">
+		<p><input type="text"></input></p>
+	</td>
+</tr>
+<!--
+	部位がある場合に限り、いろいろ出てくる
+	コア部位と部位の入力がまず出る
+	部位がある場合はステータスも増える
+-->
+<tr id="status">
+<td class="label">ステータス:</td>
+<td>
+<div id="status_0">
+<p>
+	攻撃方法:<input type="text"></input>
+	命中力:
+	<select>
+	<?php
+		for ($i=0; $i<=40; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+	</select>
+	打撃点:2d+
+	<select>
+	<?php
+		for ($i=0; $i<=40; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+	</select>
+</p>
+<p>
+	回避:
+	<select>
+	<?php
+		for ($i=0; $i<=40; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+	</select>
+	防護点:
+	<select>
+	<?php
+		for ($i=0; $i<=30; $i++){
+		echo "<option value=".$i.">".$i."</option>";
+		}
+	?>
+	</select>
+</p>
+<p>
+	HP:<input type="text" class="three_words"></input>
+	MP:<input type="text" class="three_words"></input>
+</p>
+</div>
+</td>
+</tr>
+<!--
+部位名(部位がある場合のみ)
+-->
+<tr id="skill_region" class="hide">
+	<td>部位(特殊能力):</td>
+	<td><p class=1><input type="text"></p>
+	<button type="button" value="add" onclick="skill_region(this)">追加</button>
+	<button type="button" value="del" onclick="skill_region(this)">削除</button>
+	</td>
+</tr>
+<tr id="skill">
+<td class="label">特殊能力:</td>
+<td>
+<div id="skill_0" class=0>
+	<p><input type="checkbox" class=0 name="skill" value="none" onchange="no_skill(this)">なし</p>
+	<div id="skill_inner_0">
+	<!--
+		なしの場合下全部消す
+<p class="skill_region_hidden">全身</P>
+		-->
+	<!--
+		部位がある場合のみ表示。基本的には表示しない
+		しかしこの部分のデータ全部を文字列として残しておいて、取得するほうが貼り付けるの楽っぽいのでここを残すかわからない。簡単にAppendできるし
+		部位がある場合は全部複製しなきゃいけないからいらない気がする
+	-->
+<p id="first_select_0_0" class="skill">
+	<!--
+		onイベントで取得
+		切り替えられたら中身を表示する
+		一応無効化を入れてあるので、それは最初から表示しておくように
+	-->
+	<input type="radio" class=0 name="skill" value="resistance" checked="checked">無効/耐性
+	<input type="radio" name="skill" value="magic">魔法
+	<input type="radio" name="skill" value="enhancer">練技
+	<input type="radio" name="skill" value="song">呪歌
+	<input type="radio" name="skill" value="valit">汎用
+	<input type="radio" name="skill" value="other">その他
+</p>
+<div id="skill_insert_0_0">
+<p>
+
+<input>魔法
+<span>
+<select>
+<option>
+
+</select>
+レベル／魔力
+<select>
+
+</select>
+</span>
+
+
+
+
+
+
+</p>
+
+
+	<p>
+		<input type="checkbox" name="resistance" value="fire_invalid">○炎無効
+
+
+<!--
+		onイベントで取得
+		changeでもクリックでも
+		切り替えられたら中身を表示する
+		初期状態はOnloadで無効耐性を流し込む
+		中身をクリアしやすいようにDivタグで囲っておく
+		ID入れ替えめんどくさいからいらなくないかこれ
+-->
+さんぷる
+</div></div>
+<button type="button" class=0 value="skill_append" onclick="special_make(this)">追加</button>
+<button type="button" class=0 value="skill_delete" onclick="special_make(this)">削除</button>
+</div>
+</td>
+</tr>
+<!--
+	エラー出てたので変更
+ -->
+<tr id="booty" class=0>
+<td class="label">戦利品:</td>
+<td>
+<div id="booty_0" class="booty_not">
+<p>
+	<span>
+		ダイス:
+		<select>
+			<option value="auto">自動</option>
+			<?php
+				for ($i=3; $i<=13; $i++){
+				echo "<option value=".$i.">".$i."</option>";
+				}
+			?>
+			<option value="max">以上</option>
+		</select>
+	</span>
+	<span>
+		戦利品:<input type="text" name="booty"></input>
+	</span>
+	<span>
+		ガメル:
+		<input type="text" name="booty" class="three_words" value=0></input>G　
+	</span>
+</p>
+	<p>
+		カード色
+		<label><input type="checkbox" name="booty" value="none">なし</label>
+		<label><input type="checkbox" name="booty" value="red">赤</label>
+		<label><input type="checkbox" name="booty" value="green">緑</label>
+		<label><input type="checkbox" name="booty" value="black">黒</label>
+		<label><input type="checkbox" name="booty" value="white">白</label>
+		<label><input type="checkbox" name="booty" value="gold">金</label>
+	</p>
+	<p>
+	<select>
+		<option value="none">倍率なし</option>
+		<option value=2>×2</option>
+		<option value="1d">×1d</option>
+	</select>
+	</p>
+
+</div>
+	<p>
+		<button type="button" value="booty_append" onclick="booty_make(this)">追加</button>
+		<button type="button" value="booty_delete" onclick="booty_make(this)">削除</button>
+	</p>
+</td></tr>
+<tr id="description">
+	<td class="label">詳細:</td>
+	<td>
+		<textarea></textarea>
+	</td>
+</tr>
+<tr><td colspan="2">
+<p class="center">
+<button type="button" value="send">送信</button>
+<button type="button" value="prev" onclick="test()">プレビュー</button>
+</p>
+</td></tr>
+</table>
+</form>
+
+<form id = "input_form" class="secret_form" action="post_prev.php" method="post" name="input_form" data-array="">
+<!--
+この部分に隠しフォームを仕込み、データを流し込んでおく
+ -->
+</form>
+
+
+<div class="back_top"><br><a href="index.html">top</a><br><br></div>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>エネミーリスト</title>
+<style></style>
+<script type="text/javascript" src="../jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="DB_index.js"></script>
+<script type="text/javascript" src="enemy.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="content-style-type" content="text/css">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="special.css" type="text/css" media="screen">
+<link rel="stylesheet" href="pop_up.css" type="text/css" media="screen">
+</head>
+<body>
+<div id="header">
+<img src="../../img/header.png" top="0px">
+<div id="header_menu">
+<p><a href="top" class="top" onclick="return false;"><img src="../../img/top.png"></a></p>
+<p><a href="../test2.html" class="character" onclick=""><img src="../../img/character.png"></a></p>
+<p><a href="item" class="item" onclick="return false;"><img src="../../img/item.png"></a></p>
+<p><a href="story" class="story" onclick="return false;"><img src="../../img/story.png"></a></p>
+<p><a href="../fairy_garden.html" class="fairy_garden"  onclick=""><img src="../../img/fairy_garden.png"></a></p>
+<p><a href="world_map" class="world_map" onclick="return false;"><img src="../../img/world_map.png"></a></p>
+<p><a href="special" class="special"  onclick="return false;"><img src="../../img/special.png"></a></p>
+</div></div>
+<?php
+echo "<div id='db_select' class='".$_GET["table"]."'>データベース選択\n";
+?>
+<select onchange="table_change(this)">
+	<option value="barbaros">蛮族</option>
+	<option value="animal">動物</option>
+	<option value="plant">植物</option>
+	<option value="undead">アンデッド</option>
+	<option value="magical_creatures">魔法生物</option>
+	<option value="cryptid">幻獣</option>
+	<option value="fairy">妖精</option>
+	<option value="daemon">魔神</option>
+	<option value="human">人族</option>
+	</select>
+</div>
+<?php
+//記録：やっておくこと
+//まず冗長な検索システムの削除。いらんわこんなもん。あって移動と名前だけでいいだろ
+//あと部位を記録してる部分か
+//バトルよりの方では、特技からの検索可能に。
+//検索システムに名前以外の指定が出来るように。セレクトボックスを活用する。
+//HPなど値系は完全一致に加え、幅を取れるようにする。(ex.1～5
+//問題はintになっていない場合。これは検索だと引っかかりにくい
+//よく考えたら全部引っかかるんだった。何の問題もないじゃねえか
+
+//配列として必要なデータは取っておく
+/*
+0:id 1:name 2:level 3:race 4:review 5:knowledge 6:sense 7:reaction 8:word 9:habitat 10:reputation 11:weak 12:weak_point 13:preemitive 14:move 15:con 16:pow 17:pic 18:weapon 19:hit 20:avoid 21:ap 22:dp 23:HP 24:MP 25:special 26:booty 27:booty_dice 28:booty_gamel 29:booty_card 30:description
+
+*/
+$i=0;
+$k=0;
+if(isset($_GET["table"])){
+	$table_name=$_GET["table"];
+}
+
+
+//$table_name="monster";
+//ここはあとで書き換えられるように
+//リダイレクトできるようにとも言う。ここに入るときにデータをGETする
+
+$status_default=array("ID","name","level","reputation","weak","preemptive","move","region","HP","MP");	/*簡易表示(デフォルト)用。必要に応じてJS経由で書き換えを起動させる*/
+//連想配列を引っ張り出すためのもの
+
+$status_battle=array("ID","name","level","reputation","weak","preemtive","move","con","pow","HP","MP");
+
+$status_region=array("weapon","hit","ap","avoid","dp","HP","MP","special");
+//部位ごとに違う部分。攻撃力などと特殊能力
+
+$status_booty=array("ID","name","level","region","booty","booty_dice","booty_gamel","booty_card");
+
+$status_detail=array("ID","name","level","race","review","knowledge","sense","reaction","word","habitat","reputation","weak","weak_point","preemtive","move","con","pow","region","pic","weapon","hit","ap","avoid","dp","HP","MP","special","booty","booty_dice","booty_gamel","booty_card","description");
+
+$status_associate=array(
+	'ID' => 'ID',
+	'name' => '名前',
+	'level' => 'レベル',
+	'race' => '種族',
+	"review"=>"参照",
+	"knowledge"=>"知力",
+	"sense"=>"知覚",
+	"reaction"=>"反応",
+	"word"=>"言語",
+	"habitat"=>"生息地",
+	"reputation"=>"知名度",
+	"weak"=>"弱点値",
+	"weak_point"=>"弱点",
+	"preemptive"=>"先制値",
+	"move"=>"移動力",
+	"con"=>"生命抵抗",
+	"pow"=>"精神抵抗",
+	"region"=>"部位数",
+	"weapon"=>"武器",
+	"hit"=>"命中力",
+	"ap"=>"攻撃力",
+	"avoid"=>"回避",
+	"dp"=>"防護点",
+	"HP"=>"HP",
+	"MP"=>"MP",
+	"special"=>"特殊能力",
+	"booty"=>"戦利品",
+	"description"=>"詳細"
+);
+
+require_once("./conection.php");
+$mysqli = db_connect();
+
+$show_value=20;
+
+$page_num=0;	/*読み込み開始位置*/
+if(isset($_GET["show_value"])){
+	$show_value=$_GET["show_value"];
+	$page_num=$_GET["page_num"];
+	$table_name=$_GET["table"];
+}
+echo '<div id="main"><form><p id="search_box"><input type="text"><button type="button" onclick="search()">検索</button></p></form>';
+echo '<span id="page_set" class="1">';
+echo '<span id="edit">';
+
+echo <<<EOT
+表示件数
+<select id="page_change" onchange="page(0)">
+<option value="20">20</option>
+<option value="50">50</option>
+<option value="100">100</option>
+</select>
+<span id="jump">
+EOT;
+
+$sql_count="SELECT * FROM ".$table_name;
+
+$result = $mysqli -> query($sql_count);
+$row_cnt = $result->num_rows;
+$len=ceil($row_cnt/$show_value);
+
+if($page_num != ($len-1)){
+	echo '<a href="javascript:void(0)"; class="no_mouse" onclick="page(\'next\')";return false;>次へ</a><span>      </span>';
+}
+if($page_num!=0){
+	echo '<a href="javascript:void(0)"; class="no_mouse" onclick="page(\'back\')";return false;>前へ</a><span>      </span>';
+}
+if($len>5){
+	for($i=1; $i<=5; $i++){
+	echo '<a href="javascript:void(0)"; class="no_mouse" onclick="page('.($i-1).')";return false;>'.$i.'</a><span>   </span>';
+	echo "\n";
+	}
+	echo "...";
+	echo '<a href="javascript:void(0)"; class="no_mouse" onclick="page('.($len-1).')";return false;>'.$len.'</a>';
+}else{
+	for($i=1; $i<=$len; $i++){
+		echo '<a href="javascript:void(0)"; class="no_mouse" onclick="page('.($i-1).')";return false;>'.$i.'</a>';
+		echo "\n";
+	}
+}
+$page_num *= $show_value;
+
+echo '</span></span>';
+echo "\n";
+
+echo '<div id="status_table"><table><tr>';
+for($i=0; $i<count($status_default); $i++){
+	echo '<th class="_'.$status_default[$i].'">'.$status_associate["$status_default[$i]"].'</th>';
+	echo "\n";
+}
+echo '<th>セット</th>';
+echo "</tr>\n";
+//まず表の見出しを作成。最終的には変数$statusをgetなどに置き換えて操作できるように
+//データ自体の切り替えは、クラス名の切り替えで問題ないでしょう。DOM操作は最小限です
+//今回は実験兼ねてデフォルト分だけ作成する
+
+
+$sql="SELECT * FROM ".$table_name." LIMIT ".$show_value." OFFSET ".$page_num;
+if(isset($_POST["keyword"])){
+	$search_range="ID like '%コボ%'";
+	$column=tb_make("monster");
+	for($i=1; $i<$row_cnt; $i++){
+		$search_range .= " OR ".$column[$i]. " LIKE '%".$_POST["keyword"]."%'";
+	}
+	$sql="SELECT * FROM ".$table_name." WHERE ".$search_range;
+	if(isset($_POST["item"])){
+		$sql="SELECT * FROM ".$table_name." WHERE ".$item." LIKE '%".$_POST["search"]."%'";
+	}
+}
+
+//部分一致でも抽出できるようにするには・・・
+//*key_word*で出せるかな？
+//regionが2以上ならどこかで分岐させないと。この場合で表示が違うのは・・・HPとMPだけ。
+
+$result = $mysqli -> query($sql);
+$ex=0;
+$ex_region=0;
+$reg_count=0;
+$region_status=array();
+$reg_loop;
+$i=0;
+foreach ($result as $row){
+	echo '<tr class="'.$reg_count.'">';
+	for($k=0; $k<count($status_default); $k++){
+		$ex=explode("_", $row[$status_default[$k]]);
+		if($status_default[$k]!="HP" && $status_default[$k]!="MP" && $reg_count>1){
+			continue;
+		}
+
+		if($status_default[$k]=="name"){
+			echo '<td class="_'.$status_default[$k].'"><a class="id_'.$row["ID"].'"href="detail.html?table='.$table_name.'&char='.$row["ID"].'"; return false;>'.$ex[0].'</a></td>';
+			echo "\n";
+			continue;
+		}
+		if(count($ex)>3){
+			echo '<td class="_'.$status_default[$k].'">';
+			for($i=0; $i<count($ex); $i += 2){
+				echo '<p id="region_char">'.$ex[$i].'('.$ex[$i+1].')</p>';
+				echo "\n";
+			}
+			echo '</td>';
+			continue;
+		}
+		if(count($ex)==3){
+			echo '<td class="_'.$status_default[$k].'">'.$ex[0].'/'.$ex[1].'('.$ex[2].')</td>';
+			echo "\n";
+		}else{
+			echo '<td class="_'.$status_default[$k].'">'.$ex[0].'</td>';
+			echo "\n";
+		}
+	}
+	echo '<td class="_button"><button type="button" onclick="stack('.$row["ID"].',\''.$row["name"].'\')" value="set">セット</button>';
+	echo "\n";
+	echo '</td>';
+	echo '</tr>';
+}
+
+echo '</table></span>';
+if(isset($_GET["stack"])){
+	$stack=$_GET["stack"];
+	$count=$_GET["count"];
+}else{
+	$stack=0;
+	$count=0;
+}
+echo "<div id=\"selecter\"><span class='".$count."' id=\"stack\" data-stack_char='".$stack."'></span>
+	<input type=\"checkbox\" value=\"matome\">移動と同時に送信</input>
+	<button id=\"set_button\" type=\"submit\" value=\"move\" onclick=\"change_booty()\">移動</button>
+	<button id=\"set_button\" type=\"submit\" value=\"send\" onclick=\"chip_make(this)\">送信</button>
+	</div><div id=\"calc_space\"></div><div id=\"footer\"></div></div></div>";
+
+
+
+
+?>
+<div id="pop_up">
+<div id="splash">
+<img src="./img/loading.gif">
+</div>
+<div id="contents">
+<div id="enemy_img"><img class="obj_pop_up" src="./img/NI.png"></div>
+<div id="top">
+<p>名称：<span class="obj_pop_up">ダミー　</span>レベル：<span class="obj_pop_up">ダミー　</span></p>
+<p>種族:<span class="obj_pop_up">ダミー　</span>知能：<span class="obj_pop_up">ダミー　</span></p>
+<p>知覚:<span class="obj_pop_up">ダミー　</span>反応:<span class="obj_pop_up">ダミー　</span></p>
+<p>知名度/弱点:<span class="obj_pop_up">ダミー/ダミー</span></p>
+<p>弱点:<span class="obj_pop_up">ダミー　</span></p>
+<p>先制:<span class="obj_pop_up">ダミー　</span>移動:<span class="obj_pop_up">ダミー　</span></p>
+<p>生命抵抗:<span class="obj_pop_up">ダミー　</span>精神抵抗:<span class="obj_pop_up">ダミー　</span></p>
+</div>
+<div id="table_set">
+<table class="table_1">
+<tr><th id="weapon">攻撃方法</th><th>命中力</th><th>打撃点</th></tr>
+<tr><td class="obj_pop_up">ダミー</td><td class="obj_pop_up">ダミー</td><td class="obj_pop_up">ダミー</td></tr>
+</table>
+<table class="table_2">
+<tr><th>回避</th><th>防護点</th></tr>
+<tr><td class="obj_pop_up">ダミー</td><td class="obj_pop_up">ダミー</td></tr>
+</table>
+<table class="table_3">
+<tr><th>HP</th><th>MP</th></tr>
+<tr><td class="obj_pop_up">ダミー</td><td class="obj_pop_up">ダミー</td></tr>
+</table></div>
+<div id="under">
+<div class="obj_pop_up"><br></div>
+<p>特殊能力</p>
+<div class="obj_pop_up">ダミー</div>
+</div></div></div>
+</body></html>
+<script>
+window.onload=search_enter();
+</script>
+

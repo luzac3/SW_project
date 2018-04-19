@@ -1,0 +1,298 @@
+function _11(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：薬草園';
+	area.innerHTML='エリア：南エリア';
+
+	shisetsu.innerHTML='施設：探索';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="itazura(); return false;">'+'妖精のいたずら'+'</a>'+'</li>';	
+
+}
+function _12(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：煙草好きの森';
+	area.innerHTML='エリア：北東エリア';
+
+	shisetsu.innerHTML='施設：探索';
+	cell_main.innerHTML="<p>"+"</P>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="entlet(); return false;">'+'病気のエントレット'+'</a>'+'</li>';	
+
+}
+function _13(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：妖精の鉱山';
+	area.innerHTML='エリア：東エリア';
+
+	shisetsu.innerHTML='施設：探索';
+	cell_main.innerHTML="<p>"+"</P>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="itazura(); return false;">'+'妖精のいたずら'+'</a>'+'</li>';	
+
+}
+
+function _14(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：巨人たちの墓場';
+	area.innerHTML='エリア：北東エリア';
+
+	shisetsu.innerHTML='施設：探索';
+	cell_main.innerHTML="<p>"+"</P>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="footprints(); return false;">'+'エマの足跡'+'</a>'+'</li>';	
+
+}
+
+function _15(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：白い巨塔';
+	area.innerHTML='エリア：南東エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</P>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="redflower(); return false;">'+'赤い花の蕾'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="tower_boss(); return false;">'+'巨塔の主'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="pedestal(); return false;">'+'大理石の台座'+'</a>'+'</li>';
+;	
+
+}
+
+function _16(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：小川と屋根付き橋';
+	area.innerHTML='エリア：南エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</P>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="tsuisou(); return false;">'+'追想の闇'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="gensou(); return false;">'+'過去幻想'+'</a>'+'</li>';	
+
+}
+
+function _21(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：花咲く丘';
+	area.innerHTML='エリア：南エリア';
+
+	shisetsu.innerHTML='施設：休息';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="utage(); return false;">'+'妖精たちの宴'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="enkai(); return false;">'+'大宴会'+'</a>'+'</li>';	
+
+}
+function _22(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：光の樹';
+	area.innerHTML='エリア：南東エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</P>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="splight_song(); return false;">'+'光の樹の歌'+'</a>'+'</li>';	
+
+}
+
+
+function _31(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：風車の谷';
+	area.innerHTML='エリア：北西エリア';
+
+	shisetsu.innerHTML='施設：休息・取引';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="windmill(); return false;">'+'発見、風車の谷の村'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="vits(); return false;">'+'ビッツとセシリアの家'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="irai_31(); return false;">'+'村人の依頼'+'</a>'+'</li>';	
+
+}
+
+function _32(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：羊ヶ原';
+	area.innerHTML='エリア：北エリア';
+
+	shisetsu.innerHTML='施設：休息・取引';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="sheep(); return false;">'+'発見、羊ヶ原の村'+'</a>'+'</li>';	
+
+}
+
+
+function _33(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：大空の小さな家';
+	area.innerHTML='エリア：南東エリア';
+
+	shisetsu.innerHTML='施設：';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="gather(); return false;">'+'集まる妖精たち'+'</a>'+'</li>';	
+
+}
+
+function _34(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：逆さまの沼';
+	area.innerHTML='エリア：北エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="swamp(); return false;">'+'沼にはまる'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="flog(); return false;">'+'謎のカエル'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="flog_2(); return false;">'+'謎のカエルの正体は……'+'</a>'+'</li>';	
+
+}
+
+function _41(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：太陽と月と星の迷宮';
+	area.innerHTML='エリア：北エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="meikyu(); return false;">'+'迷宮の中へ！'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="banzoku(); return false;">'+'蛮族の見張り①'+'</a>'+'</li>';	
+
+}
+
+function _43(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：炎の穴';
+	area.innerHTML='エリア：中央エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="popin(); return false;">'+'小さな旅人'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="flia_1(); return false;">'+'フリア発見！'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="flia_2(); return false;">'+'フリア奪還！'+'</a>'+'</li>';	
+
+}
+
+function _45(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：白百合の谷';
+	area.innerHTML='エリア：西エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="bs(); return false;">'+'吸血の魔物'+'</a>'+'</li>';	
+
+}
+
+function _46(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：大神殿';
+	area.innerHTML='エリア：南エリア';
+
+	shisetsu.innerHTML='施設：休息';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="shlac(); return false;">'+'アステリアの大神殿'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="sub(); return false;">'+'大神殿の地下室へ'+'</a>'+'</li>';	
+
+}
+
+function _51(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：大樹の森';
+	area.innerHTML='エリア：東エリア';
+
+	shisetsu.innerHTML='施設：探索';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="giras(); return false;">'+'巨獣の暴走'+'</a>'+'</li>';	
+
+}
+
+function _52(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：鳥篭の木';
+	area.innerHTML='エリア：南エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="brawny(); return false;">'+'囚われのブラウニー'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="spin(); return false;">'+'鳥篭大回転'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="Fettuccine_1(); return false;">'+'フィットチーネを救え！'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="Fettuccine_2(); return false;">'+'フィットチーネ救出！'+'</a>'+'</li>';	
+
+}
+
+function _53(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：鳥篭の木';
+	area.innerHTML='エリア：南エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="brawny(); return false;">'+'囚われのブラウニー'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="spin(); return false;">'+'鳥篭大回転'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="Fettuccine_1(); return false;">'+'フィットチーネを救え！'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="Fettuccine_2(); return false;">'+'フィットチーネ救出！'+'</a>'+'</li>';	
+
+}
+
+function _55(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：崩れゆく場所';
+	area.innerHTML='エリア：西エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="Gnocchi_2(); return false;">'+'ニョッキ発見！'+'</a>'+'</li>';	
+
+}
+
+function _61(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：ガラスの森';
+	area.innerHTML='エリア：北東エリア';
+
+	shisetsu.innerHTML='施設：－';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="galace(); return false;">'+'ガラス化した妖精'+'</a>'+'</li>';	
+
+}
+
+function _62(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：のどかな果樹園';
+	area.innerHTML='エリア：北エリア';
+
+	shisetsu.innerHTML='施設：休息・探索・取引';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="pack(); return false;">'+'パックとリンゴ'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="lana(); return false;">'+'果樹園の中の料理店'+'</a>'+'</li>';	
+
+}
+
+function _66(){
+	var meisyou=document.getElementById("meisyou");
+	meisyou.innerHTML='名称：花園の迷路';
+	area.innerHTML='エリア：南エリア';
+
+	shisetsu.innerHTML='施設：休息';
+	cell_main.innerHTML="<p>"+"</p>";
+	
+	var event=document.getElementById("event");
+	event.innerHTML='発生したイベント'+'<li>'+'<a href="#" onclick="bench(); return false;">'+'白いベンチ'+'</a>'+'</li>'+'<li>'+'<a href="#" onclick="tea_party(); return false;">'+'花妖精のお茶会へ！'+'</a>'+'</li>';	
+
+}

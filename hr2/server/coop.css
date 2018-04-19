@@ -1,0 +1,36 @@
+﻿table,tr,td{
+	border-collapse:collapse;
+	border:1px solid black;
+}
+
+.three_words{
+	width:30px;
+}
+
+textarea{
+	width:95%;
+	height:50px;
+}
+table{
+	width:65%;
+	margin: 0 auto;
+}
+.back_top{
+	text-align:center;
+	font-size:200%;
+}
+.center{
+	text-align:center;
+}
+h1{
+	text-align:center;
+}
+.center button{
+	font-size:200%;
+}
+.skill{
+	border-top:solid 1px #000000;
+}
+.booty{
+	border-top:solid 1px #000000;
+}

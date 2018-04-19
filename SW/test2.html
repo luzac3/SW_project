@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Jquery_test</title>
+<style></style>
+<script type="text/javascript" src="../jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="move2.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="content-style-type" content="text/css">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="JQtest.css" type="text/css" media="screen">
+</head>
+<body>
+<div id="back_ground">
+<img src="img/BG.jpg">
+<div id="top"></div>
+
+
+
+<div id="character" class="profile">
+<img src="img/cal_bg_01.png">
+<div id="profile" class="character_window maple">
+<p class="profile_img" ><img src="img/maple_profile.png"></p>
+</div>
+
+<div id="status" class="character_window maple">
+<p class="status_list"><img src="img/maple_status_list.png"></p>
+<p class="status"><img src="img/maple_status.png"></p>
+<p class="status_bir"><img src="img/maple_status_bir.png"></p>
+<p class="ability"><img src="img/ability.png"></p>
+<div class="ability_box">
+<img src="img/maple_ability_box.png"></div></div>
+
+<div id="detail" class="character_window maple">
+<p class="detail_head"><img src="img/maple_detail_head.png"></p>
+<p class="detail_box"><img src="img/detail_box.png"></p>
+<p class="detail_text">　19歳のナイトメア。<br>　自分に似た誰かが村で悪評を立てたため、それを倒すため、妹のかりんを連れて旅に出た。<br>　まっすぐで素直な心を持つが、それゆえ騙されたり弄られたりすることも<br>　正義心が強いとは言えないが、一般的なレベルには正義感を持っているといえる。<br>　よくものを食べる。</p>
+<div class="detail_character">
+<img src="img/maple_detail_character.png"></div></div>
+
+<div id="skill" class="character_window maple">
+<p class="combat_skill"><img src="img/combat_skill.png"></p>
+<p class="combat_skill_box"><img src="img/combat_skill_box.png"></p>
+<p class="skill"><img src="img/skill.png"></p>
+<p class="skill_box"><img src="img/skill_box.png"></p>
+<p id="combat_skill_box_text">test</p>
+<table class="combat_skill_table">
+<tr><td>スキル名<br>習得レベル<br>宣言タイミング</td></tr>
+<tr><td>効果</td></tr>
+</table>
+</div>
+
+<div id="equip" class="character_window maple">
+<p class="weapon"><img src="img/weapon.png"></p>
+<p class="weapon_box"><img src="img/weapon_box.png"></p>
+<p class="ornament"><img src="img/ornament.png"></p>
+<p class="ornament_box"><img src="img/ornament_box.png"></p>
+
+</div>
+</div>
+
+<div id="line">
+<img id="line_opacity" src="img/line.gif">
+<div id="line_icon">
+<li><a href="main" class="icon" onclick="return false;"><img src="img/main_character.png"></a></li>
+<div id="main_character" class="character_list" onclick="return false;">
+<li><a class="choose_character" href="maple" onclick="return false;"><img src="img/maple_choose.png"></a></li>
+<li><a href="karin" onclick="return false;"><img src="img/karin_normal.png"></a></li>
+<li><a href="flare" onclick="return false;"><img src="img/flare_normal.png"></a></li>
+<li><a href="nelva" onclick="return false;"><img src="img/nelva_normal.png"></a></li>
+<li><a href="aaliyah" onclick="return false";><img src="img/aaliyah_normal.png"></a></li>
+<li><a href="diana" onclick="return false";><img src="img/diana_normal.png"></a></li>
+<li><a href="twei" onclick="return false";><img src="img/twei_normal.png"></a></li>
+</div>
+
+
+<li><a href="sub" class="icon" onclick="return false;"><img src="img/sub_character.png"></a></li>
+<div id="sub_character" class="character_list" onclick="return false;">
+<li><a href="fenrir" onclick="return false;"><img src="img/fenrir_normal.png"></a></li>
+<li><a href="ark" onclick="return false";><img src="img/ark_normal.png"></a></li>
+<li><a href="lynx" onclick="return false";><img src="img/lynx_normal.png"></a></li>
+</div>
+
+<div id="tiny_character">
+<li><a href="tiny" onclick="return false;"><img src="img/tiny_character.png"></a></li>
+</div>
+
+<div id="special_character">
+<li><a href="special" onclick="return false;"><img src="img/special_character.png"></a></li>
+</div>
+
+<div id="secret_character">
+<li><a href="secret" onclick="return false;"><img src="img/secret_character.png"></a></li>
+</div>
+
+
+
+</div></div>
+<div id="tab">
+<p><a href="profile" onclick="return false;"><img src="img/profile_choose.png"></a></p>
+<p><a href="status" onclick="return false;"><img src="img/status_normal.png"></a></p>
+<p><a href="detail" onclick="return false;"><img src="img/detail_normal.png"></a></p>
+<p><a href="skill" onclick="return false;"><img src="img/skill_normal.png"></a></p>
+<p><a href="equip" onclick="return false;"><img src="img/equip_normal.png"></a></p>
+</div>
+
+</div>
+
+<div id="item"></div>
+<div id="story"></div>
+<div id="fairy_garden">
+
+
+
+
+
+</div>
+<div id="world_map"></div>
+<div id="special"></div>
+
+<div id="header">
+<img src="img/header.png" top="0px">
+<div id="header_menu">
+<p><a href="index.html" class="top"><img src="img/top.png"></a></p>
+<p><a href="character" class="character" onclick="return false;"><img src="img/character.png"></a></p>
+<p><a href="item" class="item" onclick="return false;"><img src="img/item.png"></a></p>
+<p><a href="story" class="story" onclick="return false;"><img src="img/story.png"></a></p>
+<p><a href="fairy_garden.html" class="fairy_garden"  onclick=""><img src="img/fairy_garden.png"></a></p>
+<p><a href="world_map" class="world_map" onclick="return false;"><img src="img/world_map.png"></a></p>
+<p><a href="special" class="special"  onclick="return false;"><img src="img/special.png"></a></p>
+</div></div>
+</body>
+

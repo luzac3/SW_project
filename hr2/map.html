@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+方針としては、とにかくマップを作る領域を作成する。そしてその部分にデータを流し込む
+オブジェクトの生成場所も作っておく必要がある(オブジェクト自体は後で作成する)
+オブジェクトの生成は、すべてのオブジェクトの上でないといけないので(ダイス領域よりは下だが、普段表示していないので実質最上部)、全体のオブジェクト以下に作成)
+それならbodyに流し込んでもいいような気がするが。中の内容書き換えるわけじゃないよね
+生成するオブジェクトはキャラチップとキャラデータ、データ属性を書き込んでおく
+またキャラチップは自動生成できるようにする
+-->
+<html>
+<head>
+<title>Jquery_test</title>
+<style></style>
+<script type="text/javascript" src="../jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="enemy.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="content-style-type" content="text/css">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="special.css" type="text/css" media="screen">
+<link rel="stylesheet" href="pop_up.css" type="text/css" media="screen">
+</head>
+<body>
+<div id="header">
+<img src="../img/header.png" top="0px">
+<div id="header_menu">
+<p><a href="top" class="top" onclick="return false;"><img src="../img/top.png"></a></p>
+<p><a href="../test2.html" class="character" onclick=""><img src="../img/character.png"></a></p>
+<p><a href="item" class="item" onclick="return false;"><img src="../img/item.png"></a></p>
+<p><a href="story" class="story" onclick="return false;"><img src="../img/story.png"></a></p>
+<p><a href="../fairy_garden.html" class="fairy_garden"  onclick=""><img src="../img/fairy_garden.png"></a></p>
+<p><a href="world_map" class="world_map" onclick="return false;"><img src="../img/world_map.png"></a></p>
+<p><a href="special" class="special"  onclick="return false;"><img src="../img/special.png"></a></p>
+</div></div>
+
+<div id="map">
+<img src=""></img>
+<!--
+この部分はマップ全体の表示。srcでイメージを指定する(フォーム等ですぐに変更できるように)
+イメージ等は100％に引き伸ばして使用する
+-->
+<canvas width="640px" height="480px"></canvas>
+<!--
+実際はキャンバス属性もCSSで幅等を変更できるほうが便利なので切り離すべき
+また、原則として幅等は生成時に自由に作成でき、後に変更できるように常に割合で表示するほうが利便性が高いと思われる。
+その部分の変更は、フォームによりjsから行うが、裏でPHPを使用し、DBにそのデータを放り込んでおく
+
+-->
+</div>

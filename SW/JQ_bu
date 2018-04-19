@@ -1,0 +1,324 @@
+
+/*Listの点を非表示・列、画像の位置を初期化*/
+
+
+body{
+position:relative;
+	width:1280px;
+	left:0px;
+	top:0px;
+
+}
+
+
+#header{
+	position:absolute;
+	left:12px;
+	top:0px;
+
+}
+
+#header_menu{
+	width:1120px;
+	position:absolute;
+	display: flex;
+	justify-content: space-between;
+	left:66px;
+	top:55px;
+
+}
+
+tr,td{border: 1px solid;}
+
+table{
+	border: 1px solid;
+	width:455px;
+	table-layout:fixed;
+}
+
+tr {text-indent:1em;}
+
+#line{
+	width:290px; height:100%;
+	position:absolute;
+	top:0px;
+	left:100px;
+}
+
+#line_opacity{
+	opacity:0.5;
+
+}
+
+
+#line_icon{
+	position:absolute;
+	width:270px;
+	margin:10px;
+	top:170px;
+	left:0px;
+	text-align:center;
+	list-style:none;
+	}
+
+#sample{
+	position:absolute;
+	left:600px;
+	top:300px;
+
+}
+
+#character{
+	position:absolute;
+	left:12;
+	top:170;
+}
+#profile{
+	position:absolute;
+	width:1259px;
+	height:811px;
+	overflow:hidden;
+	left:0;
+	top:0;
+}
+#status{
+	position:absolute;
+	width:1259px;
+	height:811px;
+	overflow:hidden;
+	left:0;
+	top:0;
+}
+#detail{
+	position:absolute;
+	width:1259px;
+	height:811px;
+	overflow:hidden;
+	left:0;
+	top:0;
+}
+#skill{
+	position:absolute;
+	width:1259px;
+	height:811px;
+	overflow:hidden;
+	left:0;
+	top:0;
+}
+#equip{
+	position:absolute;
+	width:1259px;
+	height:811px;
+	overflow:hidden;
+	left:0;
+	top:0;
+}
+
+
+
+#tab{
+	position:absolute;
+	display: flex;
+	left:698;
+	top:965;
+}
+
+.profile_img{
+	position:absolute;
+	top:10px;
+	left:8px;
+}
+
+.status_list{
+	position:absolute;
+	top:6px;
+	left:318px;
+
+}
+
+.status{
+	position:absolute;
+	top:6px;
+	left:908px;
+
+}
+
+.status_bir{
+	position:absolute;
+	top:380px;
+	left:318px;
+
+}
+
+.ability{
+	position:absolute;
+	top:497px;
+	left:318px;
+
+}
+
+.ability_box{
+	position:absolute;
+	top:570;
+	left:300;
+	width:935;
+	margin:15px;
+	position:absolute;
+	text-align:center;
+}
+
+.detail_head{
+	position:absolute;
+	top:36;
+	left:315;
+
+}
+.detail_box{
+	position:absolute;
+	top:172;
+	left:315;
+}
+
+.detail_text{
+	position:absolute;
+	width:425px;
+	top:210;
+	left:333;
+	font-size:24px;
+	font-family: "ＭＳ 明朝",serif;
+	color:#ffffff;
+	text-shadow:2px 1px 0px #000000;
+
+}
+.detail_character{
+	position:absolute;
+	top:36;
+	left:801;
+}
+
+.combat_skill{
+	position:absolute;
+	top:1;
+	left:316;
+
+}
+
+.combat_skill_box{
+	position:absolute;
+	top:69;
+	left:316;
+
+}
+
+#combat_skill_box_text{
+	position:absolute;
+	top:74;
+	left:316;
+	width:225px;
+
+}
+.combat_skill_box_text li{
+	font-size:24px;
+	font-family: "ＭＳ 明朝",serif;
+	color:#ffffff;
+	text-shadow:2px 1px 0px #000000;
+}
+
+.combat_skill_table{
+	position:absolute;
+	top:69;
+	left:791;
+}
+
+.skill{
+	position:absolute;
+	top:347;
+	left:316;
+
+}
+
+.skill_box{
+	position:absolute;
+	top:412;
+	left:316;
+
+}
+
+
+
+
+.weapon{
+	position:absolute;
+	top:1px;
+	left:328px;
+}
+
+.weapon_box{
+	position:absolute;
+	top:69px;
+	left:328px;
+
+}
+
+.ornament{
+	position:absolute;
+	top:347px;
+	left:328px;
+
+}
+
+.ornament_box{
+	position:absolute;
+	top:415px;
+	left:328px;
+
+}
+#status_table{
+	width:1265px;
+	height:820px;
+	position:absolute;
+	left:12px;
+	top:170px;
+}
+
+
+
+
+/*Special用かなこれ*/
+
+#status_table{
+	width:1265px;
+	height:820px;
+	position:absolute;
+	left:12px;
+	top:170px;
+}
+
+table {
+	width:90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+tr, td, th{
+	border: 1px solid;
+    background: #FFFFFF;
+    font-size:105%;
+    align: center;
+}
+td{
+	height:30px;
+}
+
+table tr:nth-child(2n) td {
+    background: #DDEEFF;
+}
+#th_ID{
+	width: 3%;
+}
+#th_level,#th_reputation,#th_weak,#th_preemptive,#th_move,#th_region{
+	width: 7%;
+}
+#th_HP,#th_MP{
+	width: 5%;
+}

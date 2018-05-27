@@ -88,18 +88,19 @@ $(document).ready(function(){
 
 							text_change(cal_new,new_class);
 					};
-					if (new_class == "profile" && old_class != "profile")
-						$("#line").animate({"left":"100px"},{duration: 1000});
-					else if (new_class != "profile" && old_class == "profile")
-						$("#line").animate({"left": "12px"},{duration: 1000});
 
-				$(".character_window").animate({left: '20px',opacity:"hide" }, 1000 );
-				$("#"+new_class).animate( {left: '0',opacity:"show" }, 750, function(){
-					$("#"+new_class).queue([]);
-					$("#"+new_class).stop();
-				});
-				$("#"+old_class).animate({ left: '0'});
-				$("#character").addClass(new_class); //選択した要素にtabのクラスを付加
+                    if (new_class == "profile" && old_class != "profile")
+                        $("#line").animate({"left":"100px"},{duration: 1000});
+                    else if (new_class != "profile" && old_class == "profile")
+                        $("#line").animate({"left": "12px"},{duration: 1000});
+
+                $(".character_window").animate({left: '20px',opacity:"hide" }, 1000 );
+                $("#"+new_class).animate( {left: '0',opacity:"show" }, 750, function(){
+                    $("#"+new_class).queue([]);
+                    $("#"+new_class).stop();
+                });
+                $("#"+old_class).animate({ left: '0'});
+                $("#character").addClass(new_class); //選択した要素にtabのクラスを付加
 
 				//おなじみの、全部閉じてまた開く
 
